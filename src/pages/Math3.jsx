@@ -8,7 +8,7 @@ export default function Math3() {
   return (
     <div>
       <div className='img-container'>
-        <ImageContainer length={40} imagePath="/math-test2/src/assets/math2-1" />
+        <ImageContainer length={40} imagePath="/math-test2/assets/math2-1" />
 
       </div>
     </div>
