@@ -8,7 +8,7 @@ import Math3 from "./pages/Math3";
 
 function App() {
     return (
-        <Router>
+        <Router basename="/math-test2">
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/math1" element={<Math1 />} />
