@@ -3,13 +3,12 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://naongcode.github.io/math-test", 
-
+  "homepage": "https://naongcode.github.io/math-test",
   "scripts": {
     "dev": "vite",
     "preview": "vite preview",
     "predeploy": "vite build",
-    "deploy": "gh-pages -d dist",
+    "deploy": "npm run build && gh-pages -d dist",
     "start": "vite",
     "build": "vite build",
     "test": "react-scripts test",
