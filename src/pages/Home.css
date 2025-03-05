@@ -1,0 +1,36 @@
+h1 {
+    text-align: center;
+}
+
+.button-container {
+    display: grid;
+    grid-template-columns: repeat(2, 120px); /* 두 개의 열, 각 열의 너비 120px */
+    gap: 10px; /* 요소들 사이의 간격 설정 */
+    justify-content: center; /* 컨테이너의 내용을 수평 가운데 정렬 */
+
+}
+
+.btn {
+    width: 120px;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn:hover {
+    background-color: #2980b9;
+}
+
+.img-container {
+    width: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    margin-top: 50px;
+}
