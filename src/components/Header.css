@@ -1,0 +1,40 @@
+.search-wrapper {
+    display: flex;
+    justify-content: center; /* 가운데 정렬 */
+    margin-top: 20px; /* 위쪽 여백 */
+  }
+
+.search-container {
+    width: 320px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #a0aec0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .search-input {
+    flex:1;
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+  }
+  
+  .search-button {
+    padding: 10px 16px;
+    background-color: #2563eb;
+    color: white;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+  }
+  
+  .search-button:hover {
+    background-color: #1d4ed8;
+  }
+  
+  .search-button:active {
+    transform: scale(0.95);
+  }

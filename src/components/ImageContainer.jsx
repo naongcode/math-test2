@@ -1,7 +1,7 @@
-import React, {useState, useRef, useEffect} from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import "./ImageContainer.css"
 
-export default function ImageContainer({ length, imagePath }) {
+export default function ImageContainer({ length, imagePath, divSettings }) {
   // 이미지 저장소
   // const images = Object.entries(import.meta.glob("/src/assets/math2-1/*.png", { eager: true }))
   // .map(([path, module]) => module.default)
@@ -15,7 +15,7 @@ export default function ImageContainer({ length, imagePath }) {
 
     const [currentIndex, setCurrentIndex] = useState(0); //인덱스관리
     const [inputValue, setInputValue] = useState(currentIndex + 1); // 페이지 표시
-    
+
     // currentIndex가 변경될 때마다 inputValue를 업데이트
     useEffect(() => {
       setInputValue(currentIndex + 1); // currentIndex + 1로 업데이트
@@ -23,7 +23,38 @@ export default function ImageContainer({ length, imagePath }) {
 
     const startX = useRef(0); // 터치 시작위치
     const isTouching = useRef(false); // 터치가 진행중인지
+    
+    // 각 div의 상태를 관리
+    const [activeIndex, setActiveIndex] = useState({});
 
+    // div 클릭 시 해당 div의 className을 변경
+    const handleClick = (index) => {
+      // 클릭된 div의 index를 저장 (기존 클릭된 div의 index와 동일한 경우 '비활성화')
+      setActiveIndex((prevStates) => ({
+        ...prevStates,
+        [index]: !prevStates[index],  // 해당 div의 active 상태 반전
+      }));
+    };
+
+    // div 설정에 맞는 스타일을 동적으로 생성
+    const getDivsForCurrentImage = () => {
+      const currentDivs = divSettings.find(item => item.index === currentIndex)?.divs || [];
+      return currentDivs.map((div, idx) => (
+        <div
+          key={idx}
+          className={`slider-div ${div.className} ${activeIndex[idx] ? 'active' : ''}`}
+          onClick={() => handleClick(idx)}
+          style={{
+            width: div.width,
+            height: div.height,
+            top: div.top,
+            left: div.left,
+          }}
+        >
+          {/* 필요한 경우 div 안에 다른 내용 추가 */}
+        </div>
+      ));
+    };
 
     // 터치
     const handleTouchStart = (e) => {
@@ -44,9 +75,9 @@ export default function ImageContainer({ length, imagePath }) {
       if (!isTouching.current) return;
 
       const moveX = e.changedTouches[0].clientX - startX.current;
-      if (moveX >50) {
+      if (moveX > 50) {
         prevSlide();
-      } else if (moveX<-50) {
+      } else if (moveX < -50) {
         nextSlide();
       } else {
         resetSlide();
@@ -54,23 +85,33 @@ export default function ImageContainer({ length, imagePath }) {
       isTouching.current = false;
     }
 
-    // 이전
-    const prevSlide = () => {
-      setCurrentIndex( (prevIndex) => (prevIndex ===0 ? 0 : prevIndex-1))
+    // 처음으로
+    const startSlide = () => {
+      setCurrentIndex(0)
     }
 
-    // 다음
+    // 마지막으로
+    const endSlide = () => {
+      setCurrentIndex(images.length - 1)
+    }
+
+    // 이전으로
+    const prevSlide = () => {
+      setCurrentIndex((prevIndex) => (prevIndex === 0 ? 0 : prevIndex - 1))
+    }
+
+    // 다음으로
     const nextSlide = () => {
       setCurrentIndex((prevIndex) => (prevIndex === images.length - 1 ? images.length - 1 : prevIndex + 1));
     };
 
-    // 리셋
+    // 리셋하기
     const resetSlide = () => {
       const slider = document.querySelector('.slider');
       slider.style.transition = "transform 0.3s ease-in-out";
       slider.style.transform = `translateX(-${currentIndex * 100}%)`;
     };
-  
+
     // 페이지 번호 입력 처리
     const handlePageInputChange = (e) => {
       const value = e.target.value;
@@ -87,6 +128,10 @@ export default function ImageContainer({ length, imagePath }) {
     return (
       <div className="slider-container">
 
+        {/* 이미지 번호에 맞는 여러 div들 렌더링 */}
+        <div className="overlay">
+          {getDivsForCurrentImage()}
+        </div>
 
         <div
           className="slider-wrapper"
@@ -94,6 +139,8 @@ export default function ImageContainer({ length, imagePath }) {
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
+
+          {/* 이미지 */}
           <div className="slider" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
             {images.map((slide, index) => (
               <div key={index} className="slide">
@@ -102,9 +149,9 @@ export default function ImageContainer({ length, imagePath }) {
             ))}
           </div>
         </div>
-        
+
         <div className="button-container">
-          {/* 이전 버튼 */}
+          <button className="prev-button" onClick={startSlide}>{"<<"}</button>
           <button className="prev-button" onClick={prevSlide}>{"<"}</button>
 
           <div className="page-info">
@@ -121,6 +168,7 @@ export default function ImageContainer({ length, imagePath }) {
 
           {/* 다음 버튼 */}
           <button className="next-button" onClick={nextSlide}>{">"}</button>
+          <button className="next-button" onClick={endSlide}>{">>"}</button>
         </div>
 
       </div>
