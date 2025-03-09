@@ -5,11 +5,14 @@ import ImageContainer from "../components/ImageContainer"
 export default function Math3() {
   const divSettings = [
     { index: 2, divs: [
-      { className: 'div1', width: '200px', height: '150px', top: '50px', left: '50px' },
-      { className: 'div2', width: '100px', height: '100px', top: '100px', left: '200px' },
+      { className: 'div1', width: '17px', height: '12px', top: '205px', left: '204px' },
+      { className: 'div1', width: '21px', height: '12px', top: '219px', left: '204px' },
     ]},
     { index: 3, divs: [
-      { className: 'div1', width: '250px', height: '200px', top: '60px', left: '100px' },
+      { className: 'div1', width: '46px', height: '12px', top: '131px', left: '160px' },
+      { className: 'div1', width: '86px', height: '30px', top: '136px', left: '41px' },
+      { className: 'div1', width: '94px', height: '12px', top: '174px', left: '158px' },
+      { className: 'div1', width: '58px', height: '12px', top: '343px', left: '106px' },
     ]},
   ];
   

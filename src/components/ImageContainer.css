@@ -7,7 +7,7 @@
     flex-direction: column; /* 세로 배치 */
     align-items: center; /* 가운데 정렬 */
     justify-content: center;
-    height: calc(100vh - 170px); /* 100vh에서 헤더와 푸터의 높이를 뺀 값 */
+    height: calc(100vh - 200px); /* 100vh에서 헤더와 푸터의 높이를 뺀 값 */
 }
   
 /* div들(이미지 위에 올라가는 div들) */
@@ -55,27 +55,36 @@
 
 .button-container {
     margin-top: 10px; /* 이미지 아래 여백 */
+    margin-bottom: 20px;
     display: flex;
-    gap: 10px; /* 버튼 사이 간격 */
+    gap: 15px; /* 버튼 사이 간격 */
     display: flex;
     justify-content: center;
 }
 
-/* 버튼 스타일 */
-.prev-button, .next-button {
-    background-color: rgba(0, 0, 0, 0.5);
+.upper-button {
+    background: linear-gradient(to bottom, rgba(0, 123, 255, 0.8), rgba(0, 86, 179, 0.8));    
     color: white;
     border: none;
     padding: 10px;
     cursor: pointer;
+    border-radius: 5px;
 }
 
-.prev-button {
-    left: 10px;
+/* 버튼 스타일 */
+.prev-button, .next-button {
+    background: linear-gradient(to bottom, rgba(0, 123, 255, 0.8), rgba(0, 86, 179, 0.8));    
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    width: 35px;
+    border-radius: 5px;
 }
 
-.next-button {
-    right: 10px;
+.prev-button:hover, .next-button:hover {
+    background: linear-gradient(to bottom, rgba(0, 143, 255, 0.9), rgba(0, 96, 191, 0.9));
+    transform: scale(1.1); /* 살짝 커지는 효과 */
 }
 
 .page-info {

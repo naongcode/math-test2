@@ -5,9 +5,11 @@ h1 {
 .page-container {
     display: grid;
     grid-template-columns: repeat(2, 120px); /* 두 개의 열, 각 열의 너비 120px */
+    grid-template-rows: repeat(9, 1fr);
     gap: 10px; /* 요소들 사이의 간격 설정 */
-    justify-content: center; /* 컨테이너의 내용을 수평 가운데 정렬 */
-    height: calc(100vh - 160px);
+    justify-content: center;
+    height: calc(100vh - 200px);
+    
 }
 
 .btn {
