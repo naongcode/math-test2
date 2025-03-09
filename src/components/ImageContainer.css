@@ -1,6 +1,6 @@
 /* 슬라이드 컨테이너 스타일 */
 .slider-container {
-    /* position: relative; */
+    position: relative;
     width: 100%;
     margin: 0 auto;
     overflow: hidden;
