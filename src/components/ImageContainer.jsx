@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import "./ImageContainer.css"
+import DraggableResizableBox from './DraggableResizableBox';
 
 export default function ImageContainer({ length, imagePath, divSettings }) {
   // 이미지 저장소
@@ -11,7 +12,7 @@ export default function ImageContainer({ length, imagePath, divSettings }) {
     return `${imagePath}/${String(index + 1).padStart(3, '0')}.png`;
   });
 
-  const Slider = () => {
+    const Slider = () => {
 
     const [currentIndex, setCurrentIndex] = useState(0); //인덱스관리
     const [inputValue, setInputValue] = useState(currentIndex + 1); // 페이지 표시
@@ -47,7 +48,7 @@ export default function ImageContainer({ length, imagePath, divSettings }) {
       setActiveIndex({}); setIsActiveAll(true);}
     const deactivateAll = () => {setActiveIndex({}); setIsActiveAll(false);}
 
-    // div 설정에 맞는 스타일을 동적으로 생성
+        // div 설정에 맞는 스타일을 동적으로 생성
     const getDivsForCurrentImage = () => {
       const currentDivs = divSettings.find(item => item.index === currentIndex)?.divs || [];
       return currentDivs.map((div, idx) => (
@@ -136,9 +137,23 @@ export default function ImageContainer({ length, imagePath, divSettings }) {
       }
     };
 
+    //박스 상태관리
+    const [boxes, setBoxes] = useState([{id:1, x:100, y:100, width:100, height:100}])
+
+    //박스추가
+    const addBox = () => {
+      setBoxes([...boxes, {id:boxes.length+1, x:100, y:100, width:100, height: 100 }]);
+    };
+
+    // 박스 위치 및 크기 업데이트
+    const updateBox = (id, newValues) => {
+      setBoxes((prev) => prev.map((box) => (box.id === id ? { ...box, ...newValues } : box)));
+    };
+
     return (
       <div className="slider-container">
         
+        {/* 버튼 */}
         <div className='button-container'>
           <button 
             className='upper-button' 
@@ -153,6 +168,7 @@ export default function ImageContainer({ length, imagePath, divSettings }) {
           {getDivsForCurrentImage()}
         </div>
 
+        {/* 터치슬라이드  */}
         <div
           className="slider-wrapper"
           onTouchStart={handleTouchStart}
@@ -170,10 +186,30 @@ export default function ImageContainer({ length, imagePath, divSettings }) {
           </div>
         </div>
 
+        {/* <div>
+          {boxes.map((box) => (
+            <DraggableResizableBox key={box.id} box={box} updateBox={updateBox} />
+          ))}
+
+          <button
+            onClick={addBox}>박스추가</button>
+
+          
+          <div>
+            {boxes.map((box) => (
+              <p key={box.id}>
+                {"{"}className: 'div {box.id}', width:'{box.width}px', height:'{box.height}px', 
+                left:'{box.x}px', top:'{box.y}px'{"}"},
+              </p>
+            ))}
+          </div>
+        </div> */}
+
         <div className="button-container">
           <button className="prev-button" onClick={startSlide}>{"<<"}</button>
           <button className="prev-button" onClick={prevSlide}>{"<"}</button>
 
+          {/* 페이지 번호 */}
           <div className="page-info">
             <input
               type="number"

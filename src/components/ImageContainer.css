@@ -39,7 +39,7 @@
 .slider {
     display: flex;
     flex-direction: row;
-    transition: transform 0.3s ease-in-out; /* 전환 애니메이션 */
+    transition: transform 0.1s ease-in-out;
 }
 
 .slide {
