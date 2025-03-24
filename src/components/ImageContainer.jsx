@@ -186,7 +186,7 @@ export default function ImageContainer({ length, imagePath, divSettings }) {
           </div>
         </div>
 
-        {/* <div>
+        <div>
           {boxes.map((box) => (
             <DraggableResizableBox key={box.id} box={box} updateBox={updateBox} />
           ))}
@@ -203,7 +203,7 @@ export default function ImageContainer({ length, imagePath, divSettings }) {
               </p>
             ))}
           </div>
-        </div> */}
+        </div>
 
         <div className="button-container">
           <button className="prev-button" onClick={startSlide}>{"<<"}</button>
